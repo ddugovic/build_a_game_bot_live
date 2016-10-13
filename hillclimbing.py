@@ -27,15 +27,15 @@ def train(submit):
 	parameters = np.zeros(env.observation_space.shape[0])
 	bestreward = 0
 
-	#100 episodes
-	for x in xrange(100):
+	#1000 episodes
+	for _ in xrange(1000):
 		newparams = parameters + (np.random.rand(len(parameters)) * 2 - 1) * noise_scaling
 		reward = run_episode(env, newparams)
 		print "reward %d best %d" % (reward, bestreward)
 		if reward > bestreward: 
 			bestreward = reward
 			parameters = newparams
-			if reward == 200:
+			if reward >= 195.0:
 				noise_scaling /= 2.0
 
 	# Dump result info to disk
